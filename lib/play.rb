@@ -1,38 +1,42 @@
 # Helper Methods
 def display_board(board)
-  puts " #{board[0]} | #{board[1]} | #{board[2]} "
-  puts "-----------"
-  puts " #{board[3]} | #{board[4]} | #{board[5]} "
-  puts "-----------"
-  puts " #{board[6]} | #{board[7]} | #{board[8]} "
+  display = ""
+  board.each_with_index do |value,i|
+    display += "#{value}"
+    display += (i+1) % 3 == 0 ? "\n-----------\n" : "|"
+  end
+puts display
+
 end
 
-def input_to_index(user_input)
-  user_input.to_i - 1
+def play(board)
+  turn = 0
+  while turn < 9
+  turn(board)
+  turn += 1
 end
-
-def move(board, index, current_player = "X")
-  board[index] = current_player
-end
-
-def position_taken?(board, location)
-  board[location] != " " && board[location] != ""
-end
-
-def valid_move?(board, index)
-  index.between?(0,8) && !position_taken?(board, index)
 end
 
 def turn(board)
-  puts "Please enter 1-9:"
-  input = gets.strip
-  index = input_to_index(input)
-  if valid_move?(board, index)
-    move(board, index)
-    display_board(board)
-  else
-    turn(board)
-  end
+  puts "Please enter 1-9"
+  position = gets.chomp
+  move(board,position)
 end
 
-# Define your play method below
+def move(board, location, current_player = "X")
+  if valid_move?(board,location)
+    board[position.to_i-1] = player
+  else
+    puts "Invalid move."
+    turn(board)
+  end
+  
+end 
+
+def valid_move?(board, position)
+  position.to_i.between?(1,9) && !position_taken?(board, position.to_i-1)
+end
+
+def position_taken?(board, location)
+  ["X","O"].include?(board[position])
+end
