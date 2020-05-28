@@ -18,7 +18,7 @@ end
 end
 
 def turn(board)
-  puts "Please enter 1-9"
+  puts "Please enter 1-9:"
   position = gets.chomp
   move(board,position)
 end
@@ -38,5 +38,5 @@ def valid_move?(board, position)
 end
 
 def position_taken?(board, location)
-  ["X","O"].include(board[position])
+  ["X","O"].include?(board[position])
 end
