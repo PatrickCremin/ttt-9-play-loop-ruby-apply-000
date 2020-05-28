@@ -38,5 +38,5 @@ def valid_move?(board, position)
 end
 
 def position_taken?(board, location)
-  [" ", " "].include?(board[position])
+  ["X","O"].include?(board[position])
 end
